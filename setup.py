@@ -72,7 +72,7 @@ setup(
         # eg: 'keyword1', 'keyword2', 'keyword3',
     ],
     python_requires='>=3.6',
-    install_requires=["pandas", "numpy", "scipy", "matplotlib", "glob"
+    install_requires=["pandas", "numpy", "scipy", "matplotlib",
     ],
     extras_require={
         # eg:
