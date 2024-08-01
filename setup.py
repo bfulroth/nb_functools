@@ -26,7 +26,7 @@ setup(
         'fallback_version': '0.0.0',
     },
     license='MIT',
-    description='A package containing useful functions for data wrangling and analysis in jupyter notebook',
+    description='A package containing useful functions for data wrangling and data analysis of biophysics experiments in a Jupyter notebook',
     long_description='{}\n{}'.format(
         re.compile('^.. start-badges.*^.. end-badges', re.M | re.S).sub('', read('README.rst')),
         re.sub(':[a-z]+:`~?(.*?)`', r'``\1``', read('CHANGELOG.rst')),
@@ -72,8 +72,7 @@ setup(
         # eg: 'keyword1', 'keyword2', 'keyword3',
     ],
     python_requires='>=3.6',
-    install_requires=[
-        # eg: 'aspectlib==1.1.1', 'six>=1.7',
+    install_requires=["pandas", "numpy", "scipy", "matplotlib", "glob"
     ],
     extras_require={
         # eg:
