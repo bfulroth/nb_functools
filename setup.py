@@ -20,11 +20,6 @@ def read(*names, **kwargs):
 
 setup(
     name='nb-functools',
-    use_scm_version={
-        'local_scheme': 'dirty-tag',
-        'write_to': 'src/nb_functools/_version.py',
-        'fallback_version': '0.0.0',
-    },
     license='MIT',
     description='A package containing useful functions for data wrangling and data analysis of biophysics experiments in a Jupyter notebook',
     long_description='{}\n{}'.format(
@@ -72,7 +67,7 @@ setup(
         # eg: 'keyword1', 'keyword2', 'keyword3',
     ],
     python_requires='>=3.6',
-    install_requires=["pandas", "numpy", "scipy", "matplotlib",
+    install_requires=["pandas>=2.2", "numpy", "scipy", "matplotlib",
     ],
     extras_require={
         # eg:
