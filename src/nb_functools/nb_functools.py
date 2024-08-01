@@ -1,7 +1,6 @@
 """Module containing useful functions for documenting Biophysics experiments in Jupyter Notebook"""
 
 from glob import glob
-from scipy.optimize import leastsq, curve_fit
 
 import math
 import numpy as np
@@ -19,7 +18,6 @@ def agg_spr_single_traces_raw_data(files_to_agg):
     df = pd.DataFrame()
 
     for i, file_tup in enumerate(files_to_agg):
-
 
         if i == 0:
 
@@ -520,7 +518,6 @@ def peval(x, p, logistic4LP_funct):
     return logistic4LP_funct(x, Top, Bottom, IC50, HillSlope)
 
 
-
 def residuals(p, x, y, logistic4LP_funct):
     """
     Deviations of data from fitted 4PL curve.
@@ -591,7 +588,7 @@ def gen_conc_series(num_pts, top, fold_dil=2, ascending=True):
     return ls_conc
 
 
-def reject_outliers(data, fold_div=2):
+def reject_outliers(data, fold_div=3):
     """
     Method that removes outliers from an array of values.
 
@@ -611,17 +608,23 @@ def reject_outliers(data, fold_div=2):
 
     dev_median = np.abs(data - np.median(data))
     mdev = np.median(dev_median)
-    fold_mdev = dev_median / mdev if mdev else np.zero(len(d))
+    fold_mdev = dev_median / mdev if mdev else np.zeros(data_size)
 
     keep = []
+    keep_ct = 0
 
     for i, val in enumerate(data):
 
         if fold_mdev[i] < fold_div:
             keep.append(val)
+            keep_ct += 1
+
+        # Keep the original data array length by appending nan if the value is an outlier.
+        else:
+            keep.append(np.nan)
 
     # Warning if > 50% of the data points are knocked out.
-    if (len(keep) / data_size) < 0.5:
-        warnings.warn("Warning! Over 50% of the points were knocked out!")
+    if (keep_ct / data_size) < 0.5:
+        print("Warning! Over 50% of the points were knocked out!")
 
     return np.array(keep)
